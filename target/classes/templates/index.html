@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<a href="/category/add">Add Category</a>  OR  <a href="/post/add">Add Post</a>
+
+Post's Category:
+<table border="1">
+    <tr>
+        <td>Post Title</td>
+        <td>Post's Category</td>
+    </tr>
+    <tr th:each="p: ${posts}">
+        <td th:text="${p.title}"></td>
+        <td><span th:each="cat: ${p.categoryList}" th:text="${cat.name + ', '}"></span></td>
+    </tr>
+</table>
+
+<div th:each="post:${posts}">
+    <a th:if="${post.imageUrl != null}" target="_blank" th:href="@{/post/getImage(imageUrl=${post.imageUrl})}"><img th:src="@{/post/getImage(imageUrl=${post.imageUrl})}" width="100"/></a>
+    <p th:text="${post.title}"></p>
+</div>
+</body>
+</html>
